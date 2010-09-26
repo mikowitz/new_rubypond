@@ -43,6 +43,30 @@ LILYPOND
   end
 end
 
+describe "ignoring an invalid note name" do
+  before do
+    @expected = (
+<<-LILYPOND
+\\version "2.13.16"
+\\include "english.ly"
+
+music = {
+  c d e f
+}
+
+\\score {
+  <<
+    \\new Staff \\music
+  >>
+}
+LILYPOND
+    ).strip
+  end
+  it "should contain version and include statements, and one staff line" do
+    score { c; d; e; x; ax; f }.should == @expected
+  end
+end
+
 describe "a score with two staves" do
   before do
     @expected = (

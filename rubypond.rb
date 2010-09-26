@@ -1,7 +1,9 @@
 module Rubypond
   module Notes
     def method_missing(m, *a, &b)
-      current_part << m.to_s 
+      if m.to_s =~ /^[abcdefg][sf]?$/
+        current_part << m.to_s
+      end
     end
   end
 end
